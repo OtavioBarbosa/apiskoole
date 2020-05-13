@@ -2,9 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
-const Model = require('./app/models/model');
 require("dotenv/config")
 // const jwt = require('jsonwebtoken')
+
+
+const usuario = require('./app/models/usuario');
+const tipo_usuario = require('./app/models/tipo_usuario');
+
+
 
 app.use(function(request, response, next) {
     response.header('Access-Control-Allow-Origin', '*');
@@ -35,10 +40,13 @@ app.set('port', process.env.PORT || 3003);
 //     });
 // }
 
-app.get('/model', Model.read)
-app.get('/model/:id', Model.getById)
-app.put('/model', Model.update)
-app.post('/model', Model.insert)
+// app.get('/usuario', usuario.read)
+app.get('/usuario/:id', usuario.getById)
+// app.put('/usuario', usuario.update)
+app.post('/usuario', usuario.insert)
+app.post('/autenticar', usuario.autenticar)
+
+app.get('/tipousuario', tipo_usuario.read)
 
 app.listen(app.get('port'), () => {
     console.log("Port " + app.get('port') + " foi inicializada");
