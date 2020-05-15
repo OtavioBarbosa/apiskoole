@@ -40,6 +40,11 @@ usuario.getById = (request, response) => {
 
 usuario.insert = (request, response) => {
     
+    if(!request.body.tipo_usuario_id || !request.body.email || !request.body.senha || !request.body.nome || !request.body.data_nascimento){
+        response.statusCode = 200
+        return response.json({data: 'Requisição inválida'})
+    }
+
     // Irá verificar se o usuário a ser cadastrado é ESTUDANTE, caso não for, será necessário liberar o acesso ao usuário
     var ativo
     if(parseInt(request.body.tipo_usuario_id) === 1){
@@ -67,8 +72,8 @@ usuario.insert = (request, response) => {
             }
 
             // Vincular o usuário e o tipo de usuário
-            connection.query('INSERT INTO usuario_has_tipo_usuario (usuario_id, tipo_usuario) VALUES (?)', 
-                [[result.insertId, request.body.tipo_usuario]], (error, result) => {
+            connection.query('INSERT INTO usuario_has_tipo_usuario (usuario_id, tipo_usuario_id) VALUES (?)', 
+                [[result.insertId, request.body.tipo_usuario_id]], (error, result) => {
                 if(error){
                     console.log('Error: ' + error.message)
                 }
