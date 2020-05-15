@@ -78,6 +78,10 @@ usuario.autenticar = (request, response) => {
         if(error){
             console.log('Error: ' + error.message)
         }
+        if(result.length === 0){
+            response.statusCode = 200
+            return response.json({data: 'Dados inválidos'})
+        }
         response.statusCode = 200
         return response.json({data: result})
     })
