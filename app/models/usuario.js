@@ -42,7 +42,7 @@ usuario.insert = (request, response) => {
     
     // Irá verificar se o usuário a ser cadastrado é ESTUDANTE, caso não for, será necessário liberar o acesso ao usuário
     var ativo
-    if(request.body.tipo_usuario === 1){
+    if(parseInt(request.body.tipo_usuario_id) === 1){
         ativo = 1
     }
     else{
