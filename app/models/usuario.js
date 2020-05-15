@@ -49,24 +49,34 @@ usuario.insert = (request, response) => {
         ativo = 0
     }
 
-    connection.query('INSERT INTO usuario (email, senha, nome, data_nascimento, ativo) VALUES (?)', 
-        [
-            [request.body.email, request.body.senha, request.body.nome, request.body.data_nascimento, ativo]
-        ], (error, result) => {
+    connection.query('SELECT * FROM usuario WHERE email = ?', 
+        [request.body.email], (error, email) => {
         if(error){
             console.log('Error: ' + error.message)
         }
-
-        // Vincular o usuário e o tipo de usuário
-        connection.query('INSERT INTO usuario_has_tipo_usuario (usuario_id, tipo_usuario) VALUES (?)', 
-            [[result.insertId, request.body.tipo_usuario]], (error, result) => {
+        if(email.length > 0){
+            response.statusCode = 200
+            return response.json({data: 'Email já está em uso'})
+        }
+        connection.query('INSERT INTO usuario (email, senha, nome, data_nascimento, ativo) VALUES (?)', 
+            [
+                [request.body.email, request.body.senha, request.body.nome, request.body.data_nascimento, ativo]
+            ], (error, result) => {
             if(error){
                 console.log('Error: ' + error.message)
             }
-        }) 
 
-        response.statusCode = 200
-        return response.json({data: result.insertId})
+            // Vincular o usuário e o tipo de usuário
+            connection.query('INSERT INTO usuario_has_tipo_usuario (usuario_id, tipo_usuario) VALUES (?)', 
+                [[result.insertId, request.body.tipo_usuario]], (error, result) => {
+                if(error){
+                    console.log('Error: ' + error.message)
+                }
+            }) 
+
+            response.statusCode = 200
+            return response.json({data: result.insertId})
+        }) 
     }) 
 }
 
