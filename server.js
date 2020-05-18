@@ -8,6 +8,7 @@ require("dotenv/config")
 
 const usuario = require('./app/models/usuario');
 const tipo_usuario = require('./app/models/tipo_usuario');
+const atividade = require('./app/models/atividade');
 
 
 
@@ -47,6 +48,13 @@ app.post('/usuario', usuario.insert)
 app.post('/autenticar', usuario.autenticar)
 
 app.get('/tipousuario', tipo_usuario.read)
+
+app.get('/atividade/:id', atividade.getById)
+app.post('/atividade', atividade.insert)
+app.post('/atividadeusuario', atividade.readAtividadesUsuario)
+app.put('/atividade', atividade.update)
+app.post('/atividadedelete', atividade.delete)
+
 
 app.listen(app.get('port'), () => {
     console.log("Port " + app.get('port') + " foi inicializada");
