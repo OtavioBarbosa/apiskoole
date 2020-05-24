@@ -70,6 +70,7 @@ app.get('/instituicaovestibular/:id', instituicaoVestibular.getById)
 app.post('/instituicaovestibular', instituicaoVestibular.insert)
 app.put('/instituicaovestibular', instituicaoVestibular.update)
 
+app.get('/cronogramavestibular', cronogramaVestibular.read)
 app.get('/cronogramavestibular/:id', cronogramaVestibular.getById)
 app.post('/cronogramavestibular', cronogramaVestibular.insert)
 app.put('/cronogramavestibular', cronogramaVestibular.update)
