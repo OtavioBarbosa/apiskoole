@@ -7,9 +7,12 @@ require("dotenv/config")
 
 
 const usuario = require('./app/models/usuario');
-const tipo_usuario = require('./app/models/tipo_usuario');
+const tipoUsuario = require('./app/models/tipoUsuario');
 const atividade = require('./app/models/atividade');
-
+const instituicao = require('./app/models/instituicao');
+const vestibular = require('./app/models/vestibular');
+const instituicaoVestibular = require('./app/models/instituicaoVestibular');
+const cronogramaVestibular = require('./app/models/cronogramaVestibular');
 
 
 app.use(function(request, response, next) {
@@ -47,13 +50,29 @@ app.get('/usuario/:id', usuario.getById)
 app.post('/usuario', usuario.insert)
 app.post('/autenticar', usuario.autenticar)
 
-app.get('/tipousuario', tipo_usuario.read)
+app.get('/tipousuario', tipoUsuario.read)
 
 app.get('/atividade/:id', atividade.getById)
 app.post('/atividade', atividade.insert)
 app.post('/atividadeusuario', atividade.readAtividadesUsuario)
 app.put('/atividade', atividade.update)
 app.post('/atividadedelete', atividade.delete)
+
+app.get('/instituicao/:id', instituicao.getById)
+app.post('/instituicao', instituicao.insert)
+app.put('/instituicao', instituicao.update)
+
+app.get('/vestibular/:id', vestibular.getById)
+app.post('/vestibular', vestibular.insert)
+app.put('/vestibular', vestibular.update)
+
+app.get('/instituicaovestibular/:id', instituicaoVestibular.getById)
+app.post('/instituicaovestibular', instituicaoVestibular.insert)
+app.put('/instituicaovestibular', instituicaoVestibular.update)
+
+app.get('/cronogramavestibular/:id', cronogramaVestibular.getById)
+app.post('/cronogramavestibular', cronogramaVestibular.insert)
+app.put('/cronogramavestibular', cronogramaVestibular.update)
 
 
 app.listen(app.get('port'), () => {

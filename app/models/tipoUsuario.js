@@ -2,9 +2,9 @@
 
 const connection = require('./database.js');
 
-const tipo_usuario = () => {}
+const tipoUsuario = () => {}
 
-tipo_usuario.read = (request, response) => {
+tipoUsuario.read = (request, response) => {
     connection.query('SELECT * FROM tipo_usuario', (error, result) => {
         if(error){
             console.log('Error: ' + error)
@@ -14,4 +14,4 @@ tipo_usuario.read = (request, response) => {
     })
 }
 
-module.exports = tipo_usuario
+module.exports = tipoUsuario
