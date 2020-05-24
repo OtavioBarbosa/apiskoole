@@ -38,7 +38,7 @@ instituicao.insert = (request, response) => {
 
 instituicao.update = (request, response) => {
     
-    if(!request.body.instituicao_id){
+    if(!request.body.instituicao_id || !request.body.razao_social){
         response.statusCode = 200
         return response.json({data: 'Requisição inválida'})
     }
