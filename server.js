@@ -13,6 +13,9 @@ const instituicao = require('./app/models/instituicao');
 const vestibular = require('./app/models/vestibular');
 const instituicaoVestibular = require('./app/models/instituicaoVestibular');
 const cronogramaVestibular = require('./app/models/cronogramaVestibular');
+const simulado = require('./app/models/simulado');
+const questao = require('./app/models/questao');
+const alternativa = require('./app/models/alternativa');
 
 
 app.use(function(request, response, next) {
@@ -75,6 +78,19 @@ app.get('/cronogramavestibular/:id', cronogramaVestibular.getById)
 app.post('/cronogramavestibular', cronogramaVestibular.insert)
 app.put('/cronogramavestibular', cronogramaVestibular.update)
 
+app.get('/simulado/:id', simulado.getById)
+app.post('/simulado', simulado.insert)
+app.put('/simulado', simulado.update)
+
+app.get('/questao/:id', questao.getById)
+app.post('/questaonumerosimulado', questao.getByNumeroSimulado)
+app.post('/questao', questao.insert)
+app.put('/questao', questao.update)
+
+app.get('/alternativa/:id', alternativa.getById)
+app.get('/alternativaquestao/:questao', alternativa.getByQuestao)
+app.post('/alternativa', alternativa.insert)
+app.put('/alternativa', alternativa.update)
 
 app.listen(app.get('port'), () => {
     console.log("Port " + app.get('port') + " foi inicializada");
