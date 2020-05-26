@@ -6,7 +6,7 @@ const questao = () => {}
 
 
 questao.getById = (request, response) => {
-    connection.query('SELECT q.* FROM questao AS q'
+    connection.query('SELECT q.*, s.simulado FROM questao AS q '
         + ' INNER JOIN simulado AS s ON s.id = q.simulado_id '
         + ' WHERE q.id = ? ', [request.params.id], (error, result) => {
         if(error){
@@ -24,9 +24,21 @@ questao.getByNumeroSimulado = (request, response) => {
         return response.json({data: 'Requisição inválida'})
     }
 
-    connection.query('SELECT q.* FROM questao AS q '
+    connection.query('SELECT q.*, s.simulado FROM questao AS q '
         + ' INNER JOIN simulado AS s ON s.id = q.simulado_id '
         + ' WHERE q.numero = ? AND q.simulado_id = ?', [request.body.numero, request.body.simulado_id], (error, result) => {
+        if(error){
+            console.log('Error: ' + error.message)
+        }
+        response.statusCode = 200
+        return response.json({data: result})
+    })
+}
+
+questao.getBySimulado = (request, response) => {
+    connection.query('SELECT q.*, s.simulado FROM questao AS q '
+        + ' INNER JOIN simulado AS s ON s.id = q.simulado_id '
+        + ' WHERE q.simulado_id = ?', [request.params.simulado], (error, result) => {
         if(error){
             console.log('Error: ' + error.message)
         }

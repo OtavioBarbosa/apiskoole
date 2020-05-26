@@ -83,6 +83,7 @@ app.post('/simulado', simulado.insert)
 app.put('/simulado', simulado.update)
 
 app.get('/questao/:id', questao.getById)
+app.get('/questaosimulado/:simulado', questao.getBySimulado)
 app.post('/questaonumerosimulado', questao.getByNumeroSimulado)
 app.post('/questao', questao.insert)
 app.put('/questao', questao.update)
