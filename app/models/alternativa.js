@@ -48,7 +48,7 @@ alternativa.insert = (request, response) => {
 
 alternativa.update = (request, response) => {
     
-    if(!request.body.opcao || !request.body.texto || !request.body.questao_id || !request.body.correta || !request.body.alternativa_id){
+    if(!request.body.opcao || !request.body.texto || !request.body.questao_id || !request.body.alternativa_id){
         response.statusCode = 200
         return response.json({data: 'Requisição inválida'})
     }
