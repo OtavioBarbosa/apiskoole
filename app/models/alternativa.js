@@ -32,7 +32,7 @@ alternativa.insert = (request, response) => {
         return response.json({data: 'Requisição inválida'})
     }
 
-    connection.query('INSERT INTO questao (opcao, texto, correta, questao_id) VALUES (?)', 
+    connection.query('INSERT INTO alternativa (opcao, texto, correta, questao_id) VALUES (?)', 
         [
             [request.body.opcao, request.body.texto, request.body.correta, request.body.questao_id]
         ], (error, result) => {
