@@ -27,7 +27,7 @@ alternativa.getByQuestao = (request, response) => {
 
 alternativa.insert = (request, response) => {
 
-    if(!request.body.opcao || !request.body.texto || !request.body.questao_id || !request.body.correta){
+    if(!request.body.opcao || !request.body.texto || !request.body.questao_id || request.body.correta === undefined || request.body.correta === null){
         response.statusCode = 200
         return response.json({data: 'Requisição inválida'})
     }
