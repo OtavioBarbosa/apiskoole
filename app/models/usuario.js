@@ -86,6 +86,12 @@ usuario.insert = (request, response) => {
 }
 
 usuario.autenticar = (request, response) => {
+
+    if(!request.body.email || !request.body.senha){
+        response.statusCode = 200
+        return response.json({data: 'Requisição inválida'})
+    }
+
     connection.query(`  SELECT u.*, t.tipo FROM usuario AS u 
                         INNER JOIN usuario_has_tipo_usuario AS ut ON ut.usuario_id = u.id
                         INNER JOIN tipo_usuario AS t ON ut.tipo_usuario_id = t.id
