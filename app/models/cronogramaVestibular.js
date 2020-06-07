@@ -9,7 +9,7 @@ cronogramaVestibular.read = (request, response) => {
     connection.query('SELECT cv.*, iv.instituicao_id, iv.vestibular_id, i.razao_social, v.vestibular FROM cronograma_vestibular AS cv'
         + ' INNER JOIN instituicao_has_vestibular AS iv ON iv.id = cv.instituicao_has_vestibular_id '
         + ' INNER JOIN instituicao AS i ON i.id = iv.instituicao_id '
-        + ' INNER JOIN vestibular AS v ON v.id = iv.vestibular_id ', (error, result) => {
+        + ' INNER JOIN vestibular AS v ON v.id = iv.vestibular_id ORDER BY cv.data', (error, result) => {
         if(error){
             console.log('Error: ' + error.message)
         }
