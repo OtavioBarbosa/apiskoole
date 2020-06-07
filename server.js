@@ -16,6 +16,7 @@ const cronogramaVestibular = require('./app/models/cronogramaVestibular');
 const simulado = require('./app/models/simulado');
 const questao = require('./app/models/questao');
 const alternativa = require('./app/models/alternativa');
+const respostaUsuario = require('./app/models/respostaUsuario');
 
 
 app.use(function(request, response, next) {
@@ -92,6 +93,11 @@ app.get('/alternativa/:id', alternativa.getById)
 app.get('/alternativaquestao/:questao', alternativa.getByQuestao)
 app.post('/alternativa', alternativa.insert)
 app.put('/alternativa', alternativa.update)
+
+app.get('/respostausuario/:id', respostaUsuario.getById)
+app.post('/respostausuario', respostaUsuario.insert)
+app.post('/respostausuariosimulado', respostaUsuario.readRespostasSimulado)
+app.post('/respostausuariotodas', respostaUsuario.readRespostasUsuario)
 
 app.listen(app.get('port'), () => {
     console.log("Port " + app.get('port') + " foi inicializada");
